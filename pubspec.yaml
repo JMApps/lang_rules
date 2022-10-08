@@ -1,0 +1,36 @@
+name: lang_rules
+description: Language rules
+
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=2.18.1 <3.0.0'
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.5
+  sqflite: ^2.1.0+1
+  path_provider: ^2.0.11
+  path: ^1.8.2
+  provider: ^6.0.3
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.1
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/databases/
+    - assets/fonts/
+
+  fonts:
+    - family: Hafs
+      fonts:
+      - asset: assets/fonts/hafs.ttf
+    - family: Calibri
+      fonts:
+      - asset: assets/fonts/calibri_reqular.ttf
