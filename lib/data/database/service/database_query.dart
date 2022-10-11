@@ -12,15 +12,15 @@ class DatabaseQuery {
     return allRiles;
   }
 
-  Future<int> createRule(String rule, String ruleTranslation, String ruleDescription, String example, String additionalComment) async {
+  Future<int> createRule(String rule, String ruleDescription, String ruleTranslation, String example, String additionalComment) async {
     var dbClient = await databaseService.db;
-    final ruleData = {'rule': rule, 'rule_translation': ruleTranslation, 'rule_description': ruleDescription, 'example': example, 'additional_comment': additionalComment};
+    final ruleData = {'rule': rule, 'rule_description': ruleDescription, 'rule_translation': ruleTranslation, 'example': example, 'additional_comment': additionalComment};
     return await dbClient.insert('Table_of_rules', ruleData, conflictAlgorithm: sql.ConflictAlgorithm.replace);
   }
 
-  Future<int> updateRule(int ruleId, String rule, String ruleTranslation, String ruleDescription, String example, String additionalComment) async {
+  Future<int> updateRule(int ruleId, String rule, String ruleDescription, String ruleTranslation, String example, String additionalComment) async {
     var dbClient = await databaseService.db;
-    final ruleNewData = {'rule': rule, 'rule_translation': ruleTranslation, 'rule_description': ruleDescription, 'example': example, 'additional_comment': additionalComment};
+    final ruleNewData = {'rule': rule, 'rule_description': ruleDescription, 'rule_translation': ruleTranslation, 'example': example, 'additional_comment': additionalComment};
     return await dbClient.update('Table_of_rules', ruleNewData, conflictAlgorithm: sql.ConflictAlgorithm.replace, where: 'id == $ruleId');
   }
 

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lang_rules/domain/route/app_route.dart';
-import 'package:lang_rules/domain/state/rule_add_change_text_fields_state.dart';
+import 'package:lang_rules/domain/state/main_state.dart';
 import 'package:lang_rules/presentation/pages/main_page.dart';
 import 'package:provider/provider.dart';
 
@@ -11,8 +11,8 @@ class RootPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider<RuleAddChangeTextFieldsState>(
-          create: (_) => RuleAddChangeTextFieldsState(),
+        ChangeNotifierProvider<MainState>(
+          create: (_) => MainState(),
         ),
       ],
       child: MaterialApp(
@@ -21,7 +21,7 @@ class RootPage extends StatelessWidget {
         onGenerateRoute: AppRoute.onGeneratorRoute,
         theme: ThemeData(
           fontFamily: 'Calibri',
-          primarySwatch: Colors.teal,
+          primarySwatch: Colors.indigo,
         ),
         home: const MainPage(),
       ),

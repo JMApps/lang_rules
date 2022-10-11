@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:lang_rules/data/database/model/rules_content_arguments.dart';
+import 'package:flutter_html/flutter_html.dart';
 import 'package:lang_rules/data/database/model/rules_model_item.dart';
-import 'package:lang_rules/domain/state/rule_add_change_text_fields_state.dart';
-import 'package:provider/provider.dart';
+import 'package:lang_rules/presentation/widgets/item_menu.dart';
 
 class RulesItem extends StatelessWidget {
   const RulesItem({Key? key, required this.item}) : super(key: key);
@@ -20,77 +19,120 @@ class RulesItem extends StatelessWidget {
       child: InkWell(
         borderRadius: BorderRadius.circular(25),
         child: Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: 8,
-            vertical: 16,
-          ),
+          padding: const EdgeInsets.all(16),
           child: Column(
             children: [
-              Container(
-                padding: const EdgeInsets.all(8),
-                decoration: BoxDecoration(
-                  color: Colors.red.shade50,
-                  borderRadius: BorderRadius.circular(25),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(
-                    item.rule,
-                    style: TextStyle(
-                        color: Colors.red.shade700,
-                        fontSize: 30,
-                        fontFamily: 'Hafs'),
-                    textAlign: TextAlign.center,
-                    textDirection: TextDirection.rtl,
+              ListTile(
+                contentPadding: EdgeInsets.zero,
+                title: const Text(
+                  'Название на арабском',
+                  style: TextStyle(
+                    fontSize: 12,
+                    color: Colors.grey,
                   ),
+                  textAlign: TextAlign.center,
+                ),
+                subtitle: Text(
+                  item.rule,
+                  style: TextStyle(
+                    color: Colors.teal.shade700,
+                    fontSize: 22,
+                    fontFamily: 'Hafs',
+                  ),
+                  textAlign: TextAlign.center,
+                  textDirection: TextDirection.rtl,
                 ),
               ),
-              const SizedBox(height: 16),
-              Text(
-                item.ruleTranslation,
-                style: const TextStyle(
-                  color: Colors.teal,
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
+              ListTile(
+                contentPadding: EdgeInsets.zero,
+                title: const Text(
+                  'Описание правила',
+                  style: TextStyle(
+                    fontSize: 12,
+                    color: Colors.grey,
+                  ),
+                  textAlign: TextAlign.center,
                 ),
-                textAlign: TextAlign.center,
-              ),
-              const SizedBox(height: 8),
-              Text(
-                item.ruleDescription,
-                style: const TextStyle(
-                  fontSize: 18,
-                  color: Colors.black87,
-                ),
-                textAlign: TextAlign.center,
-              ),
-              const SizedBox(height: 8),
-              Text(
-                item.example,
-                style: const TextStyle(
-                  fontSize: 18,
-                  color: Colors.black54,
+                subtitle: Text(
+                  item.ruleDescription,
+                  style: const TextStyle(
+                    fontSize: 18,
+                    color: Colors.red,
+                  ),
+                  textAlign: TextAlign.center,
                 ),
               ),
-              const SizedBox(height: 8),
-              Text(
-                item.additionalComment,
-                style: const TextStyle(
-                  fontSize: 18,
-                  color: Colors.black54,
+              ListTile(
+                contentPadding: EdgeInsets.zero,
+                title: const Text(
+                  'Перевод правила',
+                  style: TextStyle(
+                    fontSize: 12,
+                    color: Colors.grey,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+                subtitle: Text(
+                  item.ruleTranslation,
+                  style: const TextStyle(
+                    color: Colors.teal,
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+              ),
+              ListTile(
+                contentPadding: EdgeInsets.zero,
+                title: const Text(
+                  'Пример',
+                  style: TextStyle(
+                    fontSize: 12,
+                    color: Colors.grey,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+                subtitle: Html(
+                  data: item.example,
+                  style: {
+                    '#': Style(
+                      fontSize: const FontSize(18),
+                      color: Colors.black87,
+                      textAlign: TextAlign.center,
+                    ),
+                  },
+                ),
+              ),
+              ListTile(
+                contentPadding: EdgeInsets.zero,
+                title: const Text(
+                  'Дополнительный комментарий',
+                  style: TextStyle(
+                    fontSize: 12,
+                    color: Colors.grey,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+                subtitle: Text(
+                  item.additionalComment,
+                  style: const TextStyle(
+                    fontSize: 18,
+                    color: Colors.black54,
+                  ),
+                  textAlign: TextAlign.center,
                 ),
               ),
             ],
           ),
         ),
         onTap: () {
-          Navigator.of(context).pushNamed(
-            'change_rule_page',
-            arguments: RulesContentArguments(item),
+          showModalBottomSheet(
+            context: context,
+            backgroundColor: Colors.transparent,
+            builder: (BuildContext context) {
+              return ItemMenu(item: item);
+            },
           );
-        },
-        onLongPress: () {
-          context.read<RuleAddChangeTextFieldsState>().deleteRule(item.id);
         },
       ),
     );

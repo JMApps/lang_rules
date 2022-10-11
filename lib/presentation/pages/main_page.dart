@@ -12,6 +12,7 @@ class MainPage extends StatelessWidget {
         elevation: 0,
         centerTitle: true,
         title: const Text('Правила языка'),
+        backgroundColor: Colors.teal,
       ),
       body: const RulesList(),
       floatingActionButton: const AddRuleButton(),
