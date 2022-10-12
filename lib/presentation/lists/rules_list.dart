@@ -15,14 +15,14 @@ class RulesList extends StatelessWidget {
             ? CupertinoScrollbar(
                 child: ListView.builder(
                   padding: const EdgeInsets.all(16),
-                  itemCount: snapshot.data.length!,
+                  itemCount: snapshot.data!.length,
                   itemBuilder: (BuildContext context, int index) {
-                    return RulesItem(item: snapshot.data[index]!);
+                    return RulesItem(item: snapshot.data![index]);
                   },
                 ),
               )
             : const Center(
-                child: Text('Добавьте первое правило'),
+                child: Text('Добавьте первое правило +', style: TextStyle(fontSize: 18),),
               );
       },
     );

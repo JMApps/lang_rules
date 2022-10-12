@@ -8,8 +8,8 @@ class DatabaseQuery {
   Future<List<RulesModelItem>> getAllRules() async {
     var dbClient = await databaseService.db;
     var res = await dbClient.query('Table_of_rules');
-    List<RulesModelItem>? allRiles = res.isNotEmpty ? res.map((c) => RulesModelItem.fromMap(c)).toList() : [];
-    return allRiles;
+    List<RulesModelItem>? allRiles = res.isNotEmpty ? res.map((c) => RulesModelItem.fromMap(c)).toList() : null;
+    return allRiles!;
   }
 
   Future<int> createRule(String rule, String ruleTranslation, String ruleDescription, String ruleDescriptionTranslation,  String example, String additionalComment) async {

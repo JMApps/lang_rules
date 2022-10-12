@@ -27,10 +27,12 @@ class ItemMenu extends StatelessWidget {
             child: Column(
               children: [
                 MaterialButton(
-                  color: Colors.teal.shade300,
-                  textColor: Colors.white,
+                  textColor: Colors.teal,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(15),
+                    side: BorderSide(
+                      color: Colors.teal.shade300,
+                    ),
                   ),
                   child: const SizedBox(
                     width: double.infinity,
@@ -51,10 +53,12 @@ class ItemMenu extends StatelessWidget {
                   },
                 ),
                 MaterialButton(
-                  color: Colors.red.shade300,
-                  textColor: Colors.white,
+                  textColor: Colors.red,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(15),
+                    side: BorderSide(
+                      color: Colors.red.shade300,
+                    ),
                   ),
                   child: const SizedBox(
                     width: double.infinity,
@@ -94,10 +98,12 @@ class ItemMenu extends StatelessWidget {
                                     ),
                                     const SizedBox(height: 16),
                                     MaterialButton(
-                                      color: Colors.red.shade300,
-                                      textColor: Colors.white,
+                                      textColor: Colors.red,
                                       shape: RoundedRectangleBorder(
                                         borderRadius: BorderRadius.circular(15),
+                                        side: BorderSide(
+                                          color: Colors.red.shade300,
+                                        ),
                                       ),
                                       child: const SizedBox(
                                         width: double.infinity,
@@ -111,14 +117,18 @@ class ItemMenu extends StatelessWidget {
                                       ),
                                       onPressed: () {
                                         Navigator.of(context).pop();
-                                        context.read<MainState>().deleteRule(item.id);
+                                        context
+                                            .read<MainState>()
+                                            .deleteRule(item.id);
                                       },
                                     ),
                                     MaterialButton(
-                                      color: Colors.teal.shade300,
-                                      textColor: Colors.white,
+                                      textColor: Colors.teal,
                                       shape: RoundedRectangleBorder(
                                         borderRadius: BorderRadius.circular(15),
+                                        side: BorderSide(
+                                          color: Colors.teal.shade300,
+                                        ),
                                       ),
                                       child: const SizedBox(
                                         width: double.infinity,

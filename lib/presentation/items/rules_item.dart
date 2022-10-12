@@ -11,6 +11,7 @@ class RulesItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool isComment = item.additionalComment.length != 0;
     return Card(
       elevation: 2,
       margin: const EdgeInsets.only(bottom: 16),
@@ -23,161 +24,137 @@ class RulesItem extends StatelessWidget {
           padding: const EdgeInsets.all(16),
           child: Column(
             children: [
-              ListTile(
-                contentPadding: EdgeInsets.zero,
-                title: const Text(
-                  'Правило',
-                  style: TextStyle(
-                    fontSize: 12,
-                    color: Colors.grey,
-                  ),
-                  textAlign: TextAlign.center,
+              const Text(
+                'Правило',
+                style: TextStyle(
+                  fontSize: 12,
+                  color: Colors.grey,
                 ),
-                subtitle: Html(
-                  data: '${item.rule}<a href="${item.ruleTranslation}">[*]</a>',
-                  style: {
-                    '#': Style(
-                      color: Colors.teal.shade700,
-                      fontSize: const FontSize(30),
-                      fontFamily: 'Hafs',
-                      textAlign: TextAlign.center,
-                      direction: TextDirection.rtl,
-                    ),
-                    'a': Style(
-                      color: Colors.indigo,
-                      fontSize: const FontSize(14),
-                    ),
-                  },
-                  onLinkTap: (String? url, RenderContext rendContext,
-                      Map<String, String> attributes, element) {
-                    showModalBottomSheet(
-                      context: context,
-                      backgroundColor: Colors.transparent,
-                      builder: (_) => CardFootNote(footNoteContent: url!),
-                    );
-                  },
-                ),
+                textAlign: TextAlign.center,
               ),
-              ListTile(
-                contentPadding: EdgeInsets.zero,
-                title: const Text(
-                  'Перевод правила',
-                  style: TextStyle(
-                    fontSize: 12,
-                    color: Colors.grey,
+              Html(
+                data: '${item.rule}<a href="${item.ruleTranslation}">[*]</a>',
+                style: {
+                  '#': Style(
+                    color: Colors.teal.shade700,
+                    fontSize: const FontSize(30),
+                    fontFamily: 'Hafs',
+                    textAlign: TextAlign.center,
+                    direction: TextDirection.rtl,
                   ),
-                  textAlign: TextAlign.center,
-                ),
-                subtitle: Text(
-                  item.ruleTranslation,
-                  style: const TextStyle(
-                    color: Colors.teal,
-                    fontSize: 18,
+                  'a': Style(
+                    color: Colors.indigo,
+                    fontSize: const FontSize(14),
                   ),
-                  textAlign: TextAlign.center,
-                ),
+                },
+                onLinkTap: (String? url, RenderContext rendContext,
+                    Map<String, String> attributes, element) {
+                  showModalBottomSheet(
+                    context: context,
+                    backgroundColor: Colors.transparent,
+                    builder: (_) => CardFootNote(footNoteContent: url!),
+                  );
+                },
               ),
-              ListTile(
-                contentPadding: EdgeInsets.zero,
-                title: const Text(
-                  'Описание правила',
-                  style: TextStyle(
-                    fontSize: 12,
-                    color: Colors.grey,
-                  ),
-                  textAlign: TextAlign.center,
+              const Text(
+                'Перевод правила',
+                style: TextStyle(
+                  fontSize: 12,
+                  color: Colors.grey,
                 ),
-                subtitle: Html(
-                  data: '${item.ruleDescription}<a href="${item.ruleDescriptionTranslation}">[*]</a>',
-                  style: {
-                    '#': Style(
-                      fontSize: const FontSize(18),
-                      color: Colors.red,
-                      direction: TextDirection.rtl,
-                      textAlign: TextAlign.center,
-                    ),
-                    'a': Style(
-                      color: Colors.indigo,
-                      fontSize: const FontSize(14),
-                    ),
-                  },
-                  onLinkTap: (String? url, RenderContext rendContext,
-                      Map<String, String> attributes, element) {
-                    showModalBottomSheet(
-                      context: context,
-                      backgroundColor: Colors.transparent,
-                      builder: (_) => CardFootNote(footNoteContent: url!),
-                    );
-                  },
-                ),
+                textAlign: TextAlign.center,
               ),
-              ListTile(
-                contentPadding: EdgeInsets.zero,
-                title: const Text(
-                  'Перевод описания правила',
-                  style: TextStyle(
-                    fontSize: 12,
-                    color: Colors.grey,
-                  ),
-                  textAlign: TextAlign.center,
+              Text(
+                item.ruleTranslation,
+                style: const TextStyle(
+                  color: Colors.teal,
+                  fontSize: 18,
                 ),
-                subtitle: Html(
-                  data: item.ruleDescriptionTranslation,
-                  style: {
-                    '#': Style(
-                      fontSize: const FontSize(18),
-                      color: Colors.red,
-                      textAlign: TextAlign.center,
-                    ),
-                    'a': Style(
-                      color: Colors.indigo,
-                      fontSize: const FontSize(14),
-                    ),
-                  },
-                ),
+                textAlign: TextAlign.center,
               ),
-              ListTile(
-                contentPadding: EdgeInsets.zero,
-                title: const Text(
-                  'Пример',
-                  style: TextStyle(
-                    fontSize: 12,
-                    color: Colors.grey,
-                  ),
-                  textAlign: TextAlign.center,
+              const Text(
+                'Описание правила',
+                style: TextStyle(
+                  fontSize: 12,
+                  color: Colors.grey,
                 ),
-                subtitle: Html(
-                  data: item.example,
-                  style: {
-                    '#': Style(
-                      fontSize: const FontSize(18),
-                      color: Colors.black87,
-                      textAlign: TextAlign.center,
-                    ),
-                  },
-                ),
+                textAlign: TextAlign.center,
               ),
-              item.additionalComment.isEmpty
-                  ? ListTile(
-                      contentPadding: EdgeInsets.zero,
-                      title: const Text(
-                        'Дополнительный комментарий',
-                        style: TextStyle(
-                          fontSize: 12,
-                          color: Colors.grey,
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
-                      subtitle: Text(
-                        item.additionalComment,
-                        style: const TextStyle(
-                          fontSize: 18,
-                          color: Colors.black54,
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
-                    )
-                  : const SizedBox(),
+              Html(
+                data:
+                    '${item.ruleDescription}<a href="${item.ruleDescriptionTranslation}">[*]</a>',
+                style: {
+                  '#': Style(
+                    fontSize: const FontSize(18),
+                    fontFamily: 'Hafs',
+                    color: Colors.red,
+                    direction: TextDirection.rtl,
+                    textAlign: TextAlign.center,
+                  ),
+                  'a': Style(
+                    color: Colors.indigo,
+                    fontSize: const FontSize(14),
+                  ),
+                },
+                onLinkTap: (String? url, RenderContext rendContext,
+                    Map<String, String> attributes, element) {
+                  showModalBottomSheet(
+                    context: context,
+                    backgroundColor: Colors.transparent,
+                    builder: (_) => CardFootNote(footNoteContent: url!),
+                  );
+                },
+              ),
+              const Text(
+                'Перевод описания правила',
+                style: TextStyle(
+                  fontSize: 12,
+                  color: Colors.grey,
+                ),
+                textAlign: TextAlign.center,
+              ),
+              Text(
+                item.ruleDescriptionTranslation,
+                style: const TextStyle(
+                  fontSize: 18,
+                  color: Colors.red,
+                ),
+                textAlign: TextAlign.center,
+              ),
+              const Text(
+                'Пример',
+                style: TextStyle(
+                  fontSize: 12,
+                  color: Colors.grey,
+                ),
+                textAlign: TextAlign.center,
+              ),
+              Html(
+                data: item.example,
+                style: {
+                  '#': Style(
+                    fontSize: const FontSize(18),
+                    color: Colors.black87,
+                    textAlign: TextAlign.center,
+                  ),
+                },
+              ),
+              isComment ? const Text(
+                'Дополнительный комментарий',
+                style: TextStyle(
+                  fontSize: 12,
+                  color: Colors.grey,
+                ),
+                textAlign: TextAlign.center,
+              ) : const SizedBox(),
+              isComment ? Text(
+                item.additionalComment,
+                style: const TextStyle(
+                  fontSize: 18,
+                  color: Colors.black54,
+                ),
+                textAlign: TextAlign.center,
+              ) : const SizedBox(),
             ],
           ),
         ),
