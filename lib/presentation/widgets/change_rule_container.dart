@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:lang_rules/data/database/model/rules_model_item.dart';
-import 'package:lang_rules/domain/state/update_rule_state.dart';
 import 'package:lang_rules/domain/state/main_state.dart';
+import 'package:lang_rules/domain/state/update_rule_state.dart';
 import 'package:provider/provider.dart';
 
 class ChangeRuleContainer extends StatefulWidget {
@@ -30,6 +30,7 @@ class _ChangeRuleContainerState extends State<ChangeRuleContainer> {
               autocorrect: false,
               keyboardType: TextInputType.text,
               textInputAction: TextInputAction.next,
+              textDirection: TextDirection.rtl,
               maxLines: 1,
               textAlign: TextAlign.center,
               style: const TextStyle(
@@ -40,44 +41,7 @@ class _ChangeRuleContainerState extends State<ChangeRuleContainer> {
               decoration: InputDecoration(
                 alignLabelWithHint: true,
                 floatingLabelAlignment: FloatingLabelAlignment.center,
-                hintText: 'Введите новое название правила*',
-                hintStyle: const TextStyle(
-                  fontSize: 16,
-                  fontFamily: 'Calibri',
-                  color: Colors.grey,
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(15),
-                  borderSide: const BorderSide(
-                    color: Colors.indigoAccent,
-                    width: 1.5,
-                  ),
-                ),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(15),
-                ),
-              ),
-              onChanged: (String? value) {},
-            ),
-            const SizedBox(height: 16),
-            TextField(
-              controller: readRuleState.getRuleDescription,
-              autofocus: false,
-              autocorrect: false,
-              keyboardType: TextInputType.text,
-              textInputAction: TextInputAction.done,
-              maxLines: 7,
-              minLines: 5,
-              textAlign: TextAlign.center,
-              style: const TextStyle(
-                fontFamily: 'Calibri',
-                fontSize: 16,
-                color: Colors.red,
-              ),
-              decoration: InputDecoration(
-                alignLabelWithHint: true,
-                floatingLabelAlignment: FloatingLabelAlignment.center,
-                hintText: 'Введите новое описание правила*',
+                hintText: 'Новое название правила*',
                 hintStyle: const TextStyle(
                   fontSize: 16,
                   fontFamily: 'Calibri',
@@ -114,7 +78,7 @@ class _ChangeRuleContainerState extends State<ChangeRuleContainer> {
               decoration: InputDecoration(
                 alignLabelWithHint: true,
                 floatingLabelAlignment: FloatingLabelAlignment.center,
-                hintText: 'Введите новое перевод названия*',
+                hintText: 'Новый перевод названия*',
                 hintStyle: const TextStyle(
                   fontSize: 16,
                   fontFamily: 'Calibri',
@@ -135,11 +99,83 @@ class _ChangeRuleContainerState extends State<ChangeRuleContainer> {
             ),
             const SizedBox(height: 16),
             TextField(
-              controller: readRuleState.getRuleExample,
+              controller: readRuleState.getRuleDescriptionController,
               autofocus: false,
               autocorrect: false,
-              keyboardType: TextInputType.text,
-              textInputAction: TextInputAction.done,
+              keyboardType: TextInputType.multiline,
+              textDirection: TextDirection.rtl,
+              maxLines: 7,
+              minLines: 5,
+              textAlign: TextAlign.center,
+              style: const TextStyle(
+                fontFamily: 'Calibri',
+                fontSize: 16,
+                color: Colors.red,
+              ),
+              decoration: InputDecoration(
+                alignLabelWithHint: true,
+                floatingLabelAlignment: FloatingLabelAlignment.center,
+                hintText: 'Новое описание правила*',
+                hintStyle: const TextStyle(
+                  fontSize: 16,
+                  fontFamily: 'Calibri',
+                  color: Colors.grey,
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(15),
+                  borderSide: const BorderSide(
+                    color: Colors.indigoAccent,
+                    width: 1.5,
+                  ),
+                ),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(15),
+                ),
+              ),
+              onChanged: (String? value) {},
+            ),
+            const SizedBox(height: 16),
+            TextField(
+              controller: readRuleState.getRuleDescriptionTranslationController,
+              autofocus: false,
+              autocorrect: false,
+              keyboardType: TextInputType.multiline,
+              maxLines: 7,
+              minLines: 5,
+              textAlign: TextAlign.center,
+              style: const TextStyle(
+                fontFamily: 'Calibri',
+                fontSize: 16,
+                color: Colors.red,
+              ),
+              decoration: InputDecoration(
+                alignLabelWithHint: true,
+                floatingLabelAlignment: FloatingLabelAlignment.center,
+                hintText: 'Новый перевод описания правила*',
+                hintStyle: const TextStyle(
+                  fontSize: 16,
+                  fontFamily: 'Calibri',
+                  color: Colors.grey,
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(15),
+                  borderSide: const BorderSide(
+                    color: Colors.indigoAccent,
+                    width: 1.5,
+                  ),
+                ),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(15),
+                ),
+              ),
+            ),
+            const SizedBox(height: 16),
+            TextField(
+              controller: readRuleState.getRuleExampleController,
+              autofocus: false,
+              autocorrect: false,
+              keyboardType: TextInputType.multiline,
+              textDirection: TextDirection.rtl,
               maxLines: 7,
               minLines: 5,
               textAlign: TextAlign.center,
@@ -151,7 +187,7 @@ class _ChangeRuleContainerState extends State<ChangeRuleContainer> {
               decoration: InputDecoration(
                 alignLabelWithHint: true,
                 floatingLabelAlignment: FloatingLabelAlignment.center,
-                hintText: 'Введите новое пример правила',
+                hintText: 'Новый пример правила',
                 hintStyle: const TextStyle(
                   fontSize: 16,
                   fontFamily: 'Calibri',
@@ -172,12 +208,11 @@ class _ChangeRuleContainerState extends State<ChangeRuleContainer> {
             ),
             const SizedBox(height: 16),
             TextField(
-              controller: readRuleState.getAdditionalComment,
+              controller: readRuleState.getAdditionalCommentController,
               textCapitalization: TextCapitalization.sentences,
               autofocus: false,
               autocorrect: false,
-              keyboardType: TextInputType.text,
-              textInputAction: TextInputAction.done,
+              keyboardType: TextInputType.multiline,
               maxLines: 5,
               minLines: 3,
               textAlign: TextAlign.center,
@@ -189,7 +224,7 @@ class _ChangeRuleContainerState extends State<ChangeRuleContainer> {
               decoration: InputDecoration(
                 alignLabelWithHint: true,
                 floatingLabelAlignment: FloatingLabelAlignment.center,
-                hintText: 'Введите новый дополнительный комментарий',
+                hintText: 'Новый комментарий',
                 hintStyle: const TextStyle(
                   fontSize: 16,
                   fontFamily: 'Calibri',
@@ -224,13 +259,14 @@ class _ChangeRuleContainerState extends State<ChangeRuleContainer> {
               onPressed: () {
                 Navigator.of(context).pop();
                 context.read<MainState>().updateRule(
-                  widget.item.id,
-                  readRuleState.getRuleController.text,
-                  readRuleState.getRuleDescription.text,
-                  readRuleState.getRuleTranslationController.text,
-                  readRuleState.getRuleExample.text,
-                  readRuleState.getAdditionalComment.text,
-                );
+                      widget.item.id,
+                      readRuleState.getRuleController.text,
+                      readRuleState.getRuleTranslationController.text,
+                      readRuleState.getRuleDescriptionController.text,
+                      readRuleState.getRuleDescriptionTranslationController.text,
+                      readRuleState.getRuleExampleController.text,
+                      readRuleState.getAdditionalCommentController.text,
+                    );
               },
             ),
             const SizedBox(height: 16),

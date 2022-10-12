@@ -8,15 +8,17 @@ class MainState extends ChangeNotifier {
 
   createRule(
     String rule,
-    String ruleDescription,
     String ruleTranslation,
+    String ruleDescription,
+    String ruleDescriptionTranslation,
     String example,
     String additionalComment,
   ) {
     _databaseQuery.createRule(
       rule,
-      ruleDescription,
       ruleTranslation,
+      ruleDescription,
+      ruleDescriptionTranslation,
       example,
       additionalComment,
     );
@@ -26,16 +28,18 @@ class MainState extends ChangeNotifier {
   updateRule(
     int ruleId,
     String rule,
-    String ruleDescription,
     String ruleTranslation,
+    String ruleDescription,
+    String ruleDescriptionTranslation,
     String example,
     String additionalComment,
   ) {
     _databaseQuery.updateRule(
       ruleId,
       rule,
-      ruleDescription,
       ruleTranslation,
+      ruleDescription,
+      ruleDescriptionTranslation,
       example,
       additionalComment,
     );

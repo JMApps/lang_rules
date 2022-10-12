@@ -1,33 +1,39 @@
 import 'package:flutter/material.dart';
 
 class AddRuleState extends ChangeNotifier {
+
   final _ruleController = TextEditingController();
 
   TextEditingController get getRuleController => _ruleController;
-
-  final _ruleDescription = TextEditingController();
-
-  TextEditingController get getRuleDescription => _ruleDescription;
 
   final _ruleTranslationController = TextEditingController();
 
   TextEditingController get getRuleTranslationController => _ruleTranslationController;
 
-  final _ruleExample = TextEditingController();
+  final _ruleDescriptionController = TextEditingController();
 
-  TextEditingController get getRuleExample => _ruleExample;
+  TextEditingController get getRuleDescriptionController => _ruleDescriptionController;
 
-  final _additionalComment = TextEditingController();
+  final _ruleDescriptionTranslationController = TextEditingController();
 
-  TextEditingController get getAdditionalComment => _additionalComment;
+  TextEditingController get getRuleDescriptionTranslationController => _ruleDescriptionTranslationController;
+
+  final _ruleExampleController = TextEditingController();
+
+  TextEditingController get getRuleExampleController => _ruleExampleController;
+
+  final _additionalCommentController = TextEditingController();
+
+  TextEditingController get getAdditionalCommentController => _additionalCommentController;
 
   @override
   void dispose() {
     _ruleController.dispose();
-    _ruleDescription.dispose();
     _ruleTranslationController.dispose();
-    _ruleExample.dispose();
-    _additionalComment.dispose();
+    _ruleDescriptionController.dispose();
+    _ruleDescriptionTranslationController.dispose();
+    _ruleExampleController.dispose();
+    _additionalCommentController.dispose();
     super.dispose();
   }
 }
